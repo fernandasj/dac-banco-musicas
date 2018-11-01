@@ -1,7 +1,0 @@
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/AlbumDAO.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/Album.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/infra/AlbumEmJDBC.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/Estilo.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/Banda.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/ControladorDeAlbuns.java
-/home/fernanda/NetBeansProjects/dac-banco-musicas/src/main/java/io/github/fernandasj/domain/DeletarAlbum.java
