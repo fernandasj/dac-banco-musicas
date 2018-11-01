@@ -6,8 +6,8 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import io.github.fernandasj.domain.AlbumDAO;
 import io.github.fernandasj.domain.Estilo;
+import io.github.fernandasj.domain.InterfaceDAO;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author fernanda
  */
-public class AlbumEmJDBC implements AlbumDAO{
+public class AlbumEmJDBC implements InterfaceDAO<Album>{
     
     private Connection connection;
     
@@ -99,20 +99,20 @@ public class AlbumEmJDBC implements AlbumDAO{
     }
 
     @Override
-    public List<Album> todosOsAlbuns() {
+    public List<Album> todosOsObjetos() {
         List<Album> lista = new ArrayList<>();
         try {
             Statement createStatement = this.connection.createStatement();
             ResultSet result = createStatement.executeQuery("SELECT * FROM album;");
-            iterarComClientes(result, lista);
+            iterarComAlbuns(result, lista);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
-
-    private void iterarComClientes(ResultSet result, List<Album> lista) throws SQLException {
+   
+    private void iterarComAlbuns(ResultSet result, List<Album> lista) throws SQLException {
         while (result.next()) {
             lista.add(
                 criarAlbum(result)

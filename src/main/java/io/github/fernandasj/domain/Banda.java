@@ -20,6 +20,10 @@ public class Banda {
         this.integrantes = integrantes;
     }
 
+    Banda(String nome, String localDeOrigem, String integrantes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdBanda() {
         return idBanda;
     }

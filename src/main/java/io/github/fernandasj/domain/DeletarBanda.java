@@ -5,9 +5,8 @@
  */
 package io.github.fernandasj.domain;
 
-import io.github.fernandasj.infra.AlbumEmJDBC;
+import io.github.fernandasj.infra.BandaEmJDBC;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,41 +17,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fernanda
  */
-@WebServlet(name = "DeletarAlbum", urlPatterns = {"/DeletarAlbum"})
-public class DeletarAlbum extends HttpServlet {
+@WebServlet(name = "DeletarBanda", urlPatterns = {"/DeletarBanda"})
+public class DeletarBanda extends HttpServlet {
     
-    private AlbumEmJDBC albuns = new AlbumEmJDBC();
+        private BandaEmJDBC bandas = new BandaEmJDBC();
 
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeletarAlbum</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeletarAlbum at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -66,15 +49,14 @@ public class DeletarAlbum extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("idBanda"));
         
-        int id = Integer.parseInt(request.getParameter("idAlbum"));
-        
-        Album album = this.albuns.buscar(id);
-        if(album != null){
-            this.albuns.excluir(album);
+        Banda banda = this.bandas.buscar(id);
+        if(banda != null){
+            this.bandas.excluir(banda);
             response.sendRedirect("ControladorDeAlbuns");
         }else{
-            System.out.println("O album não existe");
+            System.out.println("A banda não existe");
         }
     }
 

@@ -1,9 +1,8 @@
 package io.github.fernandasj.domain;
 
-import io.github.fernandasj.infra.AlbumEmJDBC;
+import io.github.fernandasj.infra.BandaEmJDBC;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fernanda
  */
-@WebServlet(name = "ControladorDeAlbuns", urlPatterns = {"/ControladorDeAlbuns"})
-public class ControladorDeAlbuns extends HttpServlet {
+@WebServlet(name = "ControladorDeBandas", urlPatterns = {"/ControladorDeBandas"})
+public class ControladorDeBandas extends HttpServlet {
     
-    private AlbumEmJDBC albuns = new AlbumEmJDBC();
-      
+    private BandaEmJDBC bandas = new BandaEmJDBC();
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,10 +27,10 @@ public class ControladorDeAlbuns extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorDeAlbuns</title>");            
+            out.println("<title>Servlet ControladorDeBandas</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Listagem De Albuns </h1>");
+            out.println("<h1>Listagem De Bandas </h1>");
             imprimir(out);
             out.println("</body>");
             out.println("</html>");
@@ -39,16 +38,15 @@ public class ControladorDeAlbuns extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {     
+            
+        String nome = request.getParameter("nome");
+        String localDeOrigem = request.getParameter("localDeOrigem");
+        String integrantes = request.getParameter("integrantes");
         
-        Estilo estilo = Estilo.valueOf(request.getParameter("estilo"));
-        int banda = Integer.parseInt(request.getParameter("banda"));
-        LocalDate anoDeLancamento = LocalDate.parse(request.getParameter("anoDeLancamento"));
+        Banda banda = new Banda(nome, localDeOrigem, integrantes);
         
-        Album album = new Album(estilo, banda, anoDeLancamento);
-        
-        this.albuns.salvar(album);
+        this.bandas.salvar(banda);
         
         response.sendRedirect(request.getRequestURI());
     }
@@ -56,11 +54,10 @@ public class ControladorDeAlbuns extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }// </editor-fold>// </editor-fold>// </editor-fold>// </editor-fold>// </editor-fold>// </editor-fold>// </editor-fold>// </editor-fold>
+    
     private void imprimir(PrintWriter out) {
-        this.albuns.todosOsObjetos().
-                forEach(a -> out.println("<h4>" + a.getEstilo().name()+ "</h4><form action='DeletarAlbum' method='POST'><input type='hidden' name='idAlbum' value='"+a.getIdAlbum()+"'><input type='submit' value='excluir'></form>"));
+        this.bandas.todosOsObjetos().
+                forEach(a -> out.println("<h4>" + a.getNome() + "</h4><form action='DeletarBanda' method='POST'><input type='hidden' name='idBanda' value='"+a.getIdBanda()+"'><input type='submit' value='excluir'></form>"));
     }
-
 }
